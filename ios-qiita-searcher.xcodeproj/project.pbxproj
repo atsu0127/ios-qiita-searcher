@@ -11,6 +11,12 @@
 		C42AE3CB27E5C5BD00B97001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AE3CA27E5C5BD00B97001 /* ContentView.swift */; };
 		C42AE3CD27E5C5BE00B97001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42AE3CC27E5C5BE00B97001 /* Assets.xcassets */; };
 		C42AE3D027E5C5BE00B97001 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42AE3CF27E5C5BE00B97001 /* Preview Assets.xcassets */; };
+		C42AE3DA27E5C8AC00B97001 /* QiitaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AE3D927E5C8AC00B97001 /* QiitaItem.swift */; };
+		C42AE3DC27E5CAB600B97001 /* QiitaItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AE3DB27E5CAB600B97001 /* QiitaItemsModel.swift */; };
+		C46DA3BB27E8303D0083AC6D /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46DA3BA27E8303D0083AC6D /* DetailView.swift */; };
+		C46DA3BE27E834210083AC6D /* Parma in Frameworks */ = {isa = PBXBuildFile; productRef = C46DA3BD27E834210083AC6D /* Parma */; };
+		C478B2F727E84C0A0062857B /* token.txt in Resources */ = {isa = PBXBuildFile; fileRef = C478B2F627E84C0A0062857B /* token.txt */; };
+		C4E6361627E73E0900E94B71 /* QiitaItemsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E6361527E73E0900E94B71 /* QiitaItemsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,12 @@
 		C42AE3CA27E5C5BD00B97001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C42AE3CC27E5C5BE00B97001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C42AE3CF27E5C5BE00B97001 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C42AE3D627E5C5DE00B97001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C42AE3D927E5C8AC00B97001 /* QiitaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaItem.swift; sourceTree = "<group>"; };
+		C42AE3DB27E5CAB600B97001 /* QiitaItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaItemsModel.swift; sourceTree = "<group>"; };
+		C46DA3BA27E8303D0083AC6D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C478B2F627E84C0A0062857B /* token.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = token.txt; sourceTree = "<group>"; };
+		C4E6361527E73E0900E94B71 /* QiitaItemsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaItemsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46DA3BE27E834210083AC6D /* Parma in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				C42AE3C827E5C5BD00B97001 /* ios_qiita_searcherApp.swift */,
-				C42AE3CA27E5C5BD00B97001 /* ContentView.swift */,
+				C46DA3B727E82FA10083AC6D /* Views */,
+				C46DA3B827E82FA60083AC6D /* Controllers */,
+				C46DA3B927E82FAC0083AC6D /* Models */,
+				C42AE3D627E5C5DE00B97001 /* README.md */,
 				C42AE3CC27E5C5BE00B97001 /* Assets.xcassets */,
+				C478B2F627E84C0A0062857B /* token.txt */,
 				C42AE3CE27E5C5BE00B97001 /* Preview Content */,
 			);
 			path = "ios-qiita-searcher";
@@ -65,6 +82,32 @@
 				C42AE3CF27E5C5BE00B97001 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C46DA3B727E82FA10083AC6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C42AE3CA27E5C5BD00B97001 /* ContentView.swift */,
+				C46DA3BA27E8303D0083AC6D /* DetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C46DA3B827E82FA60083AC6D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C4E6361527E73E0900E94B71 /* QiitaItemsController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C46DA3B927E82FAC0083AC6D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C42AE3D927E5C8AC00B97001 /* QiitaItem.swift */,
+				C42AE3DB27E5CAB600B97001 /* QiitaItemsModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +126,9 @@
 			dependencies = (
 			);
 			name = "ios-qiita-searcher";
+			packageProductDependencies = (
+				C46DA3BD27E834210083AC6D /* Parma */,
+			);
 			productName = "ios-qiita-searcher";
 			productReference = C42AE3C527E5C5BD00B97001 /* ios-qiita-searcher.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +157,9 @@
 				Base,
 			);
 			mainGroup = C42AE3BC27E5C5BD00B97001;
+			packageReferences = (
+				C46DA3BC27E834210083AC6D /* XCRemoteSwiftPackageReference "Parma" */,
+			);
 			productRefGroup = C42AE3C627E5C5BD00B97001 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +176,7 @@
 			files = (
 				C42AE3D027E5C5BE00B97001 /* Preview Assets.xcassets in Resources */,
 				C42AE3CD27E5C5BE00B97001 /* Assets.xcassets in Resources */,
+				C478B2F727E84C0A0062857B /* token.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +188,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C42AE3CB27E5C5BD00B97001 /* ContentView.swift in Sources */,
+				C46DA3BB27E8303D0083AC6D /* DetailView.swift in Sources */,
 				C42AE3C927E5C5BD00B97001 /* ios_qiita_searcherApp.swift in Sources */,
+				C4E6361627E73E0900E94B71 /* QiitaItemsController.swift in Sources */,
+				C42AE3DA27E5C8AC00B97001 /* QiitaItem.swift in Sources */,
+				C42AE3DC27E5CAB600B97001 /* QiitaItemsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +395,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C46DA3BC27E834210083AC6D /* XCRemoteSwiftPackageReference "Parma" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dasautoooo/Parma";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C46DA3BD27E834210083AC6D /* Parma */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C46DA3BC27E834210083AC6D /* XCRemoteSwiftPackageReference "Parma" */;
+			productName = Parma;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C42AE3BD27E5C5BD00B97001 /* Project object */;
 }
