@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+  weak var delegate: QiitaItemsViewProtocol?
   @State private var searchWord = ""
   @State private var sortTarget: QiitaItem.SortTargets = .title
   
@@ -21,12 +22,12 @@ struct ContentView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .onSubmit {
                   Task {
-                    await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                    await delegate?.loadData(by: searchWord, sort: sortTarget)
                   }
                 }
               Button("検索") {
                 Task {
-                  await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                  await delegate?.loadData(by: searchWord, sort: sortTarget)
                 }
               }
             }
@@ -40,7 +41,7 @@ struct ContentView: View {
               }
               .onChange(of: sortTarget, perform: { newValue in
                 Task {
-                  await QiitaItemsController(model: model).sortItem(by: newValue)
+                  await delegate?.sortItem(by: newValue)
                 }
               })
             }
@@ -53,7 +54,7 @@ struct ContentView: View {
             }
             .refreshable {
               Task {
-                await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                await delegate?.loadData(by: searchWord, sort: sortTarget)
               }
             }
             .listStyle(PlainListStyle())
@@ -68,7 +69,7 @@ struct ContentView: View {
             }
             .refreshable {
               Task {
-                await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                await delegate?.loadData(by: searchWord, sort: sortTarget)
               }
             }
             .listStyle(PlainListStyle())
