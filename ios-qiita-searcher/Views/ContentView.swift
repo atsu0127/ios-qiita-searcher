@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-  @ObservedObject var model: QiitaItemsModel
   weak var delegate: QiitaItemsViewProtocol?
+  @ObservedObject var model: QiitaItemsModel
   @State private var searchWord = ""
   @State private var sortTarget: QiitaItem.SortTargets = .title
   
