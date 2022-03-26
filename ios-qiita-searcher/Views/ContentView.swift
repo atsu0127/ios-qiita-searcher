@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject var model = QiitaItemsModel()
   @State private var searchWord = ""
   @State private var sortTarget: QiitaItem.SortTargets = .title
   
