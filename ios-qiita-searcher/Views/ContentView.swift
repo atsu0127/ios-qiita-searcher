@@ -7,10 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
-  @StateObject var model = QiitaItemsModel()
+struct ContentView: View, QiitaItemsPresenterOutput {
+  weak var presenter: QiitaItemsPresenterInput?
   @State private var searchWord = ""
   @State private var sortTarget: QiitaItem.SortTargets = .title
+  @State private var items: [QiitaItem] = []
+  @State private var isEmpty: Bool = false
+  @State private var isLoading: Bool = false
+  @State private var error: String?
   
   var body: some View {
     NavigationView {
@@ -22,14 +26,18 @@ struct ContentView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .onSubmit {
                   Task {
-                    await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                    await presenter?.search(in: searchWord, orderBy: sortTarget)
                   }
                 }
               Button("検索") {
                 Task {
-                  await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                  await presenter?.search(in: searchWord, orderBy: sortTarget)
                 }
               }
+            }
+            if let error = error {
+              Text(error)
+                .foregroundColor(.red)
             }
             HStack(spacing: 2) {
               Spacer()
@@ -40,42 +48,36 @@ struct ContentView: View {
                 }
               }
               .onChange(of: sortTarget, perform: { newValue in
-                Task {
-                  await QiitaItemsController(model: model).sortItem(by: newValue)
-                }
+                presenter?.sort(orderBy: newValue)
               })
             }
           }
           .padding()
           
-          if self.model.isEmpty {
+          if self.isEmpty {
             List {
               Text("検索結果がありません")
             }
             .refreshable {
               Task {
-                await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                await presenter?.search(in: searchWord, orderBy: sortTarget)
               }
             }
             .listStyle(PlainListStyle())
           } else {
-            List($model.items) { $item in
-              NavigationLink {
-                DetailView(item: $item)
-              } label: {
-                Text(item.title)
-                  .lineLimit(1)
-              }
+            List(self.$items) { $item in
+              Text(item.title)
+                .lineLimit(1)
             }
             .refreshable {
               Task {
-                await QiitaItemsController(model: model).loadData(by: searchWord, sort: sortTarget)
+                await presenter?.search(in: searchWord, orderBy: sortTarget)
               }
             }
             .listStyle(PlainListStyle())
           }
         }
-        if model.isLoading {
+        if self.isLoading {
           ProgressView()
             .scaleEffect(x: 3, y: 3, anchor: .center)
             .progressViewStyle(CircularProgressViewStyle())
@@ -86,4 +88,29 @@ struct ContentView: View {
     }
   }
   
+  func updateItems(by items: [QiitaItem]) {
+    print("======== in ========")
+    items.forEach { print($0.title) }
+    self.items = items
+    self.isEmpty = (items.count == 0)
+    print("======== result ========")
+    self.items.forEach { print($0.title) }
+    print(self.isEmpty)
+  }
+  
+  func showError(msg: String) {
+    self.error = msg
+  }
+  
+  func hideError() {
+    self.error = nil
+  }
+  
+  func startSearch() {
+    self.isLoading = true
+  }
+  
+  func endSearch() {
+    self.isLoading = false
+  }
 }

@@ -8,14 +8,8 @@
 import Foundation
 
 // MARK: - Modelクラス
-final class QiitaItemsModel: ObservableObject {
-  // MARK: - Outputs
-  @Published var items: [QiitaItem] = []
-  @Published var error: Error?
-  @Published var isLoading = false
-  @Published var isEmpty = false
-  
-  // MARK: - Varuables
+final class QiitaItemsModel {
+  // MARK: - Variables
   private var baseURL: URLComponents {
     var components = URLComponents()
     components.scheme = "https"
@@ -24,51 +18,42 @@ final class QiitaItemsModel: ObservableObject {
   }
   
   // MARK: - Callable Functions
-  func sort(by target: QiitaItem.SortTargets) async {
+  func sort(_ items:[QiitaItem], by target: QiitaItem.SortTargets) -> [QiitaItem] {
+    var sortedItems = items
     switch target {
       case .title:
-        items.sort { item1, item2 in
+        sortedItems.sort { item1, item2 in
           item1.title < item2.title
         }
       case .createdAt:
-        items.sort { item1, item2 in
+        sortedItems.sort { item1, item2 in
           item1.createdAt < item2.createdAt
         }
       case .likesCount:
-        items.sort { item1, item2 in
+        sortedItems.sort { item1, item2 in
           item1.likesCount < item2.likesCount
         }
     }
+    return sortedItems
   }
   
-  func search(by word: String) async {
-    self.error = nil
+  func search(by word: String) async throws -> [QiitaItem] {
     let (url, error) = urlBuilder(by: word)
     if let error = error {
-      self.error = error
       print("url作成でエラー: \(error.localizedDescription)")
-      return
+      throw error
     }
     
     guard let url = url else {
       print("urlが取得できませんでした")
-      return
+      throw QiitaItemsModelError.invalidURL
     }
     
-    self.isLoading = true
     do {
-      let data = try await fetch(to: url)
-      if data.count == 0 {
-        self.isEmpty = true
-      }
-      self.items = data
-      self.isLoading = false
+      return try await fetch(to: url)
     } catch {
-      self.error = error
       print("データ取得でエラー: \(error.localizedDescription)")
-      print(error)
-      self.isLoading = false
-      return
+      throw error
     }
   }
   

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C42AE3C927E5C5BD00B97001 /* ios_qiita_searcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AE3C827E5C5BD00B97001 /* ios_qiita_searcherApp.swift */; };
 		C42AE3CB27E5C5BD00B97001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AE3CA27E5C5BD00B97001 /* ContentView.swift */; };
 		C42AE3CD27E5C5BE00B97001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42AE3CC27E5C5BE00B97001 /* Assets.xcassets */; };
 		C42AE3D027E5C5BE00B97001 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42AE3CF27E5C5BE00B97001 /* Preview Assets.xcassets */; };
@@ -16,12 +15,13 @@
 		C46DA3BB27E8303D0083AC6D /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46DA3BA27E8303D0083AC6D /* DetailView.swift */; };
 		C46DA3BE27E834210083AC6D /* Parma in Frameworks */ = {isa = PBXBuildFile; productRef = C46DA3BD27E834210083AC6D /* Parma */; };
 		C478B2F727E84C0A0062857B /* token.txt in Resources */ = {isa = PBXBuildFile; fileRef = C478B2F627E84C0A0062857B /* token.txt */; };
-		C4E6361627E73E0900E94B71 /* QiitaItemsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E6361527E73E0900E94B71 /* QiitaItemsController.swift */; };
+		C47BC0E227EEA071005E0AA8 /* QiitaItemsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BC0E127EEA071005E0AA8 /* QiitaItemsPresenter.swift */; };
+		C47BC0E427F01D5A005E0AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BC0E327F01D5A005E0AA8 /* AppDelegate.swift */; };
+		C47BC0E627F01D61005E0AA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47BC0E527F01D61005E0AA8 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C42AE3C527E5C5BD00B97001 /* ios-qiita-searcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-qiita-searcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C42AE3C827E5C5BD00B97001 /* ios_qiita_searcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_qiita_searcherApp.swift; sourceTree = "<group>"; };
 		C42AE3CA27E5C5BD00B97001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C42AE3CC27E5C5BE00B97001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C42AE3CF27E5C5BE00B97001 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -30,7 +30,10 @@
 		C42AE3DB27E5CAB600B97001 /* QiitaItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaItemsModel.swift; sourceTree = "<group>"; };
 		C46DA3BA27E8303D0083AC6D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		C478B2F627E84C0A0062857B /* token.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = token.txt; sourceTree = "<group>"; };
-		C4E6361527E73E0900E94B71 /* QiitaItemsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaItemsController.swift; sourceTree = "<group>"; };
+		C47BC0E127EEA071005E0AA8 /* QiitaItemsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaItemsPresenter.swift; sourceTree = "<group>"; };
+		C47BC0E327F01D5A005E0AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C47BC0E527F01D61005E0AA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C47BC0E727F01E3F005E0AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +67,13 @@
 		C42AE3C727E5C5BD00B97001 /* ios-qiita-searcher */ = {
 			isa = PBXGroup;
 			children = (
-				C42AE3C827E5C5BD00B97001 /* ios_qiita_searcherApp.swift */,
+				C47BC0E727F01E3F005E0AA8 /* Info.plist */,
+				C47BC0E027EE9F65005E0AA8 /* Presenters */,
 				C46DA3B727E82FA10083AC6D /* Views */,
-				C46DA3B827E82FA60083AC6D /* Controllers */,
 				C46DA3B927E82FAC0083AC6D /* Models */,
 				C42AE3D627E5C5DE00B97001 /* README.md */,
+				C47BC0E327F01D5A005E0AA8 /* AppDelegate.swift */,
+				C47BC0E527F01D61005E0AA8 /* SceneDelegate.swift */,
 				C42AE3CC27E5C5BE00B97001 /* Assets.xcassets */,
 				C478B2F627E84C0A0062857B /* token.txt */,
 				C42AE3CE27E5C5BE00B97001 /* Preview Content */,
@@ -93,14 +98,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C46DA3B827E82FA60083AC6D /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C4E6361527E73E0900E94B71 /* QiitaItemsController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		C46DA3B927E82FAC0083AC6D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +105,14 @@
 				C42AE3DB27E5CAB600B97001 /* QiitaItemsModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C47BC0E027EE9F65005E0AA8 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				C47BC0E127EEA071005E0AA8 /* QiitaItemsPresenter.swift */,
+			);
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,10 +194,11 @@
 			files = (
 				C42AE3CB27E5C5BD00B97001 /* ContentView.swift in Sources */,
 				C46DA3BB27E8303D0083AC6D /* DetailView.swift in Sources */,
-				C42AE3C927E5C5BD00B97001 /* ios_qiita_searcherApp.swift in Sources */,
-				C4E6361627E73E0900E94B71 /* QiitaItemsController.swift in Sources */,
+				C47BC0E227EEA071005E0AA8 /* QiitaItemsPresenter.swift in Sources */,
+				C47BC0E427F01D5A005E0AA8 /* AppDelegate.swift in Sources */,
 				C42AE3DA27E5C8AC00B97001 /* QiitaItem.swift in Sources */,
 				C42AE3DC27E5CAB600B97001 /* QiitaItemsModel.swift in Sources */,
+				C47BC0E627F01D61005E0AA8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +332,7 @@
 				DEVELOPMENT_TEAM = QRU573PRFF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "ios-qiita-searcher/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -355,7 +361,7 @@
 				DEVELOPMENT_TEAM = QRU573PRFF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "ios-qiita-searcher/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
