@@ -11,7 +11,7 @@ import SwiftUI
 struct ios_qiita_searcherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          ContentView(qiitaItemsViewModel: .init())
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  QiitaItemsModel.swift
+//  QiitaItemsOperator.swift
 //  ios-qiita-searcher
 //
 //  Created by atabata on 2022/03/19.
@@ -8,13 +8,7 @@
 import Foundation
 
 // MARK: - Modelクラス
-final class QiitaItemsModel: ObservableObject {
-  // MARK: - Outputs
-  @Published var items: [QiitaItem] = []
-  @Published var error: Error?
-  @Published var isLoading = false
-  @Published var isEmpty = false
-  
+final class QiitaItemsOperator: ObservableObject {
   // MARK: - Varuables
   private var baseURL: URLComponents {
     var components = URLComponents()
@@ -24,51 +18,44 @@ final class QiitaItemsModel: ObservableObject {
   }
   
   // MARK: - Callable Functions
-  func sort(by target: QiitaItem.SortTargets) async {
+  func sort(items: [QiitaItem], by target: QiitaItem.SortTargets) -> [QiitaItem] {
+    var sortItems = items
     switch target {
       case .title:
-        items.sort { item1, item2 in
+        sortItems.sort { item1, item2 in
           item1.title < item2.title
         }
       case .createdAt:
-        items.sort { item1, item2 in
+        sortItems.sort { item1, item2 in
           item1.createdAt < item2.createdAt
         }
       case .likesCount:
-        items.sort { item1, item2 in
+        sortItems.sort { item1, item2 in
           item1.likesCount < item2.likesCount
         }
     }
+    return sortItems
   }
   
-  func search(by word: String) async {
-    self.error = nil
+  func search(by word: String) async throws -> [QiitaItem] {
     let (url, error) = urlBuilder(by: word)
     if let error = error {
-      self.error = error
       print("url作成でエラー: \(error.localizedDescription)")
-      return
+      throw error
     }
     
     guard let url = url else {
       print("urlが取得できませんでした")
-      return
+      throw QiitaItemsOperatorError.invalidURL
     }
     
-    self.isLoading = true
     do {
       let data = try await fetch(to: url)
-      if data.count == 0 {
-        self.isEmpty = true
-      }
-      self.items = data
-      self.isLoading = false
+      return data
     } catch {
-      self.error = error
       print("データ取得でエラー: \(error.localizedDescription)")
       print(error)
-      self.isLoading = false
-      return
+      throw error
     }
   }
   
@@ -83,7 +70,7 @@ final class QiitaItemsModel: ObservableObject {
       let (data, response) = try await URLSession.shared.data(for: request)
       
       guard let response = response as? HTTPURLResponse else {
-        throw QiitaItemsModelError.invalidResponse
+        throw QiitaItemsOperatorError.invalidResponse
       }
             
       if response.statusCode == 200 {
@@ -92,7 +79,7 @@ final class QiitaItemsModel: ObservableObject {
         let items = try decoder.decode([QiitaItem].self, from: data)
         return items
       } else {
-        throw QiitaItemsModelError.invalidStatusCode(code: response.statusCode)
+        throw QiitaItemsOperatorError.invalidStatusCode(code: response.statusCode)
       }
     } catch {
       throw error
@@ -101,13 +88,13 @@ final class QiitaItemsModel: ObservableObject {
   
   private func urlBuilder(by word: String) -> (URL?, Error?) {
     guard let query = word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-      return (nil, QiitaItemsModelError.encodingError)
+      return (nil, QiitaItemsOperatorError.encodingError)
     }
     var urlComponents = baseURL
     urlComponents.path = "/api/v2/items"
     urlComponents.queryItems = [URLQueryItem(name: "query", value: "title:\(query)")]
     guard let url = urlComponents.url else {
-      return (nil, QiitaItemsModelError.invalidURL)
+      return (nil, QiitaItemsOperatorError.invalidURL)
     }
     
     return (url, nil)
@@ -123,14 +110,14 @@ final class QiitaItemsModel: ObservableObject {
 }
 
 // MARK: - カスタムエラー
-enum QiitaItemsModelError: Error {
+enum QiitaItemsOperatorError: Error {
   case invalidURL
   case invalidResponse
   case invalidStatusCode(code: Int)
   case encodingError
 }
 
-extension QiitaItemsModelError: LocalizedError {
+extension QiitaItemsOperatorError: LocalizedError {
   var errorDescription: String? {
     switch self {
       case .invalidURL:
