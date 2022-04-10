@@ -2,7 +2,7 @@
 //  DetailView.swift
 //  ios-qiita-searcher
 //
-//  Created by atabata on 2022/03/21.
+//  Created by atabata on 2022/03/21.
 //
 
 import SwiftUI

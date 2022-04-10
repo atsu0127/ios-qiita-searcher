@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QiitaItem: Codable, Identifiable {
+struct QiitaItem: Codable, Identifiable, Hashable {
   let id = UUID()
   let title: String
   let body: String
@@ -45,6 +45,19 @@ struct QiitaItem: Codable, Identifiable {
     case likesCount = "いいね数順"
     var id: String {
       rawValue
+    }
+  }
+}
+
+extension QiitaItem.SortTargets {
+  func toKeyPath() -> KeyPath<QiitaItem, AnyComparable> {
+    switch self {
+      case .title:
+        return \.title.anyComparable
+      case .createdAt:
+        return \.createdAt.anyComparable
+      case .likesCount:
+        return \.likesCount.anyComparable
     }
   }
 }
