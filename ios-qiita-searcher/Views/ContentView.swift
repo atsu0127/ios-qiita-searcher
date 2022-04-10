@@ -68,13 +68,11 @@ struct ContentView: View {
             .listStyle(PlainListStyle())
           } else {
             List(self.$searchItemStore.items) { $item in
-              NavigationLink(
-                tag: item,
-                selection: self.$searchItemStore.selectedItem) {
-                  DetailView(item: $item)
-                } label: {
-                  Text(item.title).lineLimit(1)
-                }
+              NavigationLink {
+                DetailView(item: $item)
+              } label: {
+                Text(item.title).lineLimit(1)
+              }
             }
             .refreshable {
               Task {
